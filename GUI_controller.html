@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>controller</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Backend_libs -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+    <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <style>
+
+        body{
+            margin: 0 auto;
+            padding: 0 auto;
+        }
+        #button{
+            margin: 50px auto;
+            justify-content: center;
+            
+        }
+        #rorateRight ,#rorateLeft{
+            margin: 0 auto;
+        }
+
+        ul{
+            margin: 0;
+            padding: 0;
+        }
+
+        li{
+            width: 50%;
+        }
+
+        #buttonRotate ul li{
+            list-style: none;
+            float: left;
+        }
+    </style>
+
+  </head>
+  <body>
+        <!-- Controler_GUI -->
+
+        <!-- Button_GUI -->
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class=" col-md-4">
+                <h1 class="text-center">OMNI CONTROLLER</h1> 
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class=" col-md-4">
+                            <label for="robot-speed">  
+                            </label>
+                            <input type="range" min="1" max="100" class="custom-range" id="robot-speed">
+                            <strong>Robot Speed</strong>
+                            <output size="10" id="output"></output>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+
+                    <div id="button" style="width:40%">
+                        <svg width="100%" height="100%" viewBox="0 0 100 100">
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:rgb(16,16,16);stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:rgb(240,240,240);stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:rgb(240,240,240);stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:rgb(16,16,16);stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:rgb(168,168,168);stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:rgb(239,239,239);stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                    
+                            <circle cx="50" cy="50" r="50" fill="url(#grad1)" />
+                            <circle cx="50" cy="50" r="47" fill="url(#grad2)" stroke="black" stroke-width="1.5px" />
+                            <circle cx="50" cy="50" r="44" fill="url(#grad3)" />
+                            <circle cx="50" cy="50" r="20" fill="#cccccc" stroke="black" stroke-width="1px" class="btn11" />
+                    
+                            <path d="M50,14 L54,22 L50,20 46,22Z" fill="rgba(0,0,0,0.8)" class="btn1" />
+                            <path d="M50,86 L54,78 L50,80 46,78Z" fill="rgba(0,0,0,0.8)" class="btn4" />
+                            <path d="M14,50 L22,54 L20,50 22,46Z" fill="rgba(0,0,0,0.8)" class="btn2" />
+                            <path d="M86,50 L78,54 L80,50 78,46Z" fill="rgba(0,0,0,0.8)" class="btn3" />
+                    
+                            <path d="M22,22 L30,22 L22,30 Z" fill="rgba(0,0,0,0.8)" class="btn8" />
+                            <path d="M78,22 L70,22 L78,30 Z" fill="rgba(0,0,0,0.8)" class="btn5" />
+                            <path d="M78,78 L78,70 L70,78 Z" fill="rgba(0,0,0,0.8)" class="btn6" />
+                            <path d="M22,78 L22,70 L30,78 Z" fill="rgba(0,0,0,0.8)" class="btn7" />
+
+                        </svg>
+                    </div>
+
+
+                    <div id="buttonRotate">
+                            <ul>
+                                <li>
+                                    <div id="rorateRight" style="width:30%">
+                                        <button type="button" class="btn btn-light btn9" style="border: 7px solid black;">
+                                            <svg width="100%" height="100%" viewBox="0 0 438.542 438.542"  >
+                                                <path d="M421.125,134.191c-11.608-27.03-27.217-50.347-46.819-69.949C354.7,44.639,331.384,29.033,304.353,17.42
+                                                C277.325,5.807,248.969,0.005,219.275,0.005c-27.978,0-55.052,5.277-81.227,15.843C111.879,26.412,88.61,41.305,68.243,60.531
+                                                l-37.12-36.835c-5.711-5.901-12.275-7.232-19.701-3.999C3.807,22.937,0,28.554,0,36.547v127.907c0,4.948,1.809,9.231,5.426,12.847
+                                                c3.619,3.617,7.902,5.426,12.85,5.426h127.907c7.996,0,13.61-3.807,16.846-11.421c3.234-7.423,1.903-13.988-3.999-19.701
+                                                l-39.115-39.398c13.328-12.563,28.553-22.222,45.683-28.98c17.131-6.757,35.021-10.138,53.675-10.138
+                                                c19.793,0,38.687,3.858,56.674,11.563c17.99,7.71,33.544,18.131,46.679,31.265c13.134,13.131,23.555,28.69,31.265,46.679
+                                                c7.703,17.987,11.56,36.875,11.56,56.674c0,19.798-3.856,38.686-11.56,56.672c-7.71,17.987-18.131,33.544-31.265,46.679
+                                                c-13.135,13.134-28.695,23.558-46.679,31.265c-17.987,7.707-36.881,11.561-56.674,11.561c-22.651,0-44.064-4.949-64.241-14.843
+                                                c-20.174-9.894-37.209-23.883-51.104-41.973c-1.331-1.902-3.521-3.046-6.567-3.429c-2.856,0-5.236,0.855-7.139,2.566
+                                                l-39.114,39.402c-1.521,1.53-2.33,3.478-2.426,5.853c-0.094,2.385,0.527,4.524,1.858,6.427
+                                                c20.749,25.125,45.871,44.587,75.373,58.382c29.502,13.798,60.625,20.701,93.362,20.701c29.694,0,58.05-5.808,85.078-17.416
+                                                c27.031-11.607,50.34-27.22,69.949-46.821c19.605-19.609,35.211-42.921,46.822-69.949s17.411-55.392,17.411-85.08
+                                                C438.536,189.569,432.732,161.22,421.125,134.191z" 
+                                                class="btn9"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </li>
+    
+                                <li>
+                                    <div id="rorateLeft" style="width:30%">
+                                        <button type="button" class="btn btn-light btn10" style="border: 7px solid black;">
+                                            <svg width="100%" height="100%" viewBox="0 0 438.542 438.542">
+                                                <path d="M427.408,19.697c-7.803-3.23-14.463-1.902-19.986,3.999l-37.116,36.834C349.94,41.305,326.672,26.412,300.5,15.848
+                                                C274.328,5.285,247.251,0.003,219.271,0.003c-29.692,0-58.052,5.808-85.08,17.417c-27.03,11.61-50.347,27.215-69.951,46.82
+                                                c-19.605,19.607-35.214,42.921-46.824,69.949C5.807,161.219,0,189.575,0,219.271c0,29.687,5.807,58.05,17.417,85.079
+                                                c11.613,27.031,27.218,50.347,46.824,69.952c19.604,19.599,42.921,35.207,69.951,46.818c27.028,11.611,55.388,17.419,85.08,17.419
+                                                c32.736,0,63.865-6.899,93.363-20.7c29.5-13.795,54.625-33.26,75.377-58.386c1.52-1.903,2.234-4.045,2.136-6.424
+                                                c-0.089-2.378-0.999-4.329-2.711-5.852l-39.108-39.399c-2.101-1.711-4.473-2.566-7.139-2.566c-3.045,0.38-5.232,1.526-6.566,3.429
+                                                c-13.895,18.086-30.93,32.072-51.107,41.977c-20.173,9.894-41.586,14.839-64.237,14.839c-19.792,0-38.684-3.854-56.671-11.564
+                                                c-17.989-7.706-33.551-18.127-46.682-31.261c-13.13-13.135-23.551-28.691-31.261-46.682c-7.708-17.987-11.563-36.874-11.563-56.671
+                                                c0-19.795,3.858-38.691,11.563-56.674c7.707-17.985,18.127-33.547,31.261-46.678c13.135-13.134,28.693-23.555,46.682-31.265
+                                                c17.983-7.707,36.879-11.563,56.671-11.563c38.259,0,71.475,13.039,99.646,39.116l-39.409,39.394
+                                                c-5.903,5.711-7.231,12.279-4.001,19.701c3.241,7.614,8.856,11.42,16.854,11.42h127.906c4.949,0,9.23-1.807,12.848-5.424
+                                                c3.613-3.616,5.42-7.898,5.42-12.847V36.55C438.542,28.558,434.84,22.943,427.408,19.697z" 
+                                                class="btn10"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                <div class="col-md-4"></div>       
+            </div>
+
+        <!-- joyStick_GUI -->
+          <div class="row my-4">
+              <div class="col">
+                  <div style="width: 210px; height: 210px;">
+                    <div id="joystick"></div>
+                  </div>
+              </div>
+          </div>
+                <!-- end Controller_GUI -->        
+       
+
+          <!-- Controler_data -->   
+            
+            <script>
+                //define required values
+
+                var twist;
+                var target_ip;
+                var cmdVel;
+                var publishImmidiately = true;
+                var manager;
+                var ros;
+                
+                //Omni robot IP configuration
+
+                target_ip ="192.168.1.15";
+                ros = new ROSLIB.Ros({
+                  url: "ws://" + target_ip + ":9090"
+                });
+
+                //Initialize ros_message for Button controller
+
+                var forward = new ROSLIB.Message({
+                  linear : {
+                    x : 7,
+                    y : 0,
+                    z : 0
+                  },
+                });
+              
+                var left = new ROSLIB.Message({
+                  linear : {
+                    x : -7,
+                    y : 0,
+                    z : 0
+                  },
+                });
+              
+                var right = new ROSLIB.Message({
+                  linear : {
+                    x : 8,
+                    y : 0,
+                    z : 0,
+                  },
+                });
+              
+                var backward = new ROSLIB.Message({
+                  linear : {
+                    x : -8,
+                    y : 0,
+                    z : 0
+                  },
+                });
+              
+                var move45 = new ROSLIB.Message({
+                  linear : {
+                    x : 9,
+                    y : 0,
+                    z : 0
+                  },
+                });
+              
+                var move135 = new ROSLIB.Message({
+                  linear : {
+                    x : -9,
+                    y : 0,
+                    z : 0,
+                  },
+                });
+              
+                var move225 = new ROSLIB.Message({
+                  linear : {
+                    x : 10,
+                    y : 0,
+                    z : 0.1
+                  },
+                });
+              
+                var move315 = new ROSLIB.Message({
+                  linear : {
+                    x : -10,
+                    y : 0,
+                    z : 0,
+                  },
+                });
+              
+                var clockwise = new ROSLIB.Message({
+                  linear : {
+                    x : 6,
+                    y : 0,
+                    z : 0
+                  },
+                  angular : {
+                    x : 0,
+                    y : 0,
+                    z : 0
+                  }
+                  });
+              
+                var counterclockwise = new ROSLIB.Message({
+                  linear : {
+                    x : -6,
+                    y : 0,
+                    z : 0,
+                  },
+                  angular : {
+                    x : 0,
+                    y : 0,
+                    z : 0,
+                  }
+                  });
+              
+                var stop = new ROSLIB.Message({
+                  linear : {
+                    x : 0,
+                    y : 0,
+                    z : 0
+                  },
+                });
+                
+                //onclick callback functions for each Button 
+
+                $(".btn1" ).on("click", function() {
+                    cmdVel.publish(forward);
+                    console.log('FORWARD');
+                })
+              
+                $(".btn2" ).on("click", function() {
+                    cmdVel.publish(left);
+                })
+              
+                $(".btn3" ).on("click", function() {
+                    cmdVel.publish(right);
+                })
+              
+                $(".btn4" ).on("click", function() {
+                    cmdVel.publish(backward);
+                })
+              
+                $(".btn5" ).on("click", function() {
+                    cmdVel.publish(move45);
+                })
+              
+                $(".btn6" ).on("click", function() {
+                    cmdVel.publish(move135);
+                })
+              
+                $(".btn7" ).on("click", function() {
+                    cmdVel.publish(move225);
+                })
+              
+                $(".btn8" ).on("click", function() {
+                    cmdVel.publish(move315);
+                })
+              
+                $(".btn10" ).on("click", function() {
+                    cmdVel.publish(clockwise);
+                })
+              
+                $(".btn9" ).on("click", function() {
+                    cmdVel.publish(counterclockwise);
+                })
+              
+                $(".btn11" ).on("click", function() {
+                    cmdVel.publish(stop);
+                })
+
+                // <!-- joystick -->
+
+                function velocityPublisher() {
+
+                    //initialize message with zero values
+                    twist = new ROSLIB.Message({
+                        linear: {
+                            x: 0,
+                            y: 0,
+                            z: 0
+                        },
+                        angular: {
+                            x: 0,
+                            y: 0,
+                            z: 0,
+                        },        
+                    });
+
+                    //define topic objects: cmd_vel for x and z values, get_speed for speed slider value to generate speed of the robot (button style)
+                    cmdVel = new ROSLIB.Topic({
+                        ros: ros,
+                        name: '/cmd_vel',
+                        messageType: 'geometry_msgs/Twist'
+                    });
+                    
+                    speed = new ROSLIB.Message({
+                        data: 0,
+                    })
+
+                    getSpeed = new ROSLIB.Topic({
+                        ros: ros,
+                        name: '/get_speed',
+                        messageType: 'std_msgs/Int8'
+                    });
+                    
+                    //set up publishers queue
+                    getSpeed.advertise();
+                    cmdVel.advertise();
+                }
+
+                
+                function createSpeedSlider(){
+
+                    robotSpeed = document.getElementById("robot-speed");
+
+                    // Add event listener for slider moves
+                    robotSpeed.oninput = function () { 
+
+                        //gets the oninput value from the speed slider 
+                        var inputSpeed = robotSpeed.value ;
+
+                        // converse speed slider value into Integer 
+                        speed.data = parseInt(inputSpeed);
+
+                        //displays this value to the html page
+                        document.getElementById('output').innerHTML = speed.data 
+                        console.log(speed)
+                    }
+                    //publish to get_speed topic
+                    getSpeed.publish(speed);
+                }
+
+                function createJoystick() {
+                  
+                    if (manager == null) {
+                        joystickContainer = document.getElementById('joystick');
+
+                        // joystck configuration to adjust joystick style,
+                        var options = {
+                            zone: joystickContainer,
+                            position: { left: 50 + '%', top: 105 + 'px' },
+                            mode: 'static',
+                            size: 200,
+                            color: '#0066ff',
+                            restJoystick: true
+                        };
+
+                        //add event listener for joystick move 
+                        manager = nipplejs.create(options);
+                        manager.on('move', function (evt, nipple) {
+
+                            // joystick returns direction along with screen coordinates
+                            // for example dragging joystick towards top screen will move the robot forward
+                            var direction = nipple.angle.degree - 90;   
+                            if (direction > 180) {
+                                direction = -(450 - nipple.angle.degree); 
+                            }
+
+                            //set limit range of the outside joystick circle to x = 5 and z = 5 
+                            var lin = Math.cos(direction / 100) * nipple.distance * 0.05; 
+                            var ang = Math.sin(direction / 100) * nipple.distance * 0.05;
+
+                            // the joystick will trigger event when joystic moves from pixel to pixel
+                            // in order to prevent system from receive overload messages, we set delay condition
+                            if (publishImmidiately) {
+                                publishImmidiately = false;
+                                moveAction(lin, ang);
+
+                            // events triggered earlier than 50ms after last publication will be dropped
+                                setTimeout(function () {        
+                                    publishImmidiately = true;
+                                }, 50);
+                            }
+                        });
+                      
+                        manager.on('end', function () {
+                            moveAction(0, 0);
+                        });
+                    }
+                }
+
+                //get position data of the joystick and publish its x and z value to cmd_vel topic 
+                function moveAction(linear, angular) {
+                    if (linear !== undefined && angular !== undefined) {
+                        twist.linear.x = linear;
+                        twist.angular.z = angular;
+                    } else {
+                        twist.linear.x = 0; // the robot will stop when the joystick is at the middle
+                        twist.angular.z = 0;
+                    }
+
+                    //publish to cmd_vel topic
+                    cmdVel.publish(twist);                 
+                }
+
+                window.onload = function () {
+
+                    velocityPublisher();
+                    createSpeedSlider();
+                    createJoystick();    
+
+                }
+            </script>
+        <!-- end controller_data -->
+
+   
+    <!-- Frontend_libs -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="//yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js"></script>       
+  </body>
+</html>
